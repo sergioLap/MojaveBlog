@@ -25,5 +25,43 @@ namespace MojaveBlog.Core
         /// <returns></returns>
         int TotalPosts();
 
+        /// <summary>
+        /// Посты определенной категории.
+        /// </summary>
+        /// <param name="categorySlug"></param>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        IList<Post> PostsForCategory(string categorySlug, int pageNo, int pageSize);
+        /// <summary>
+        /// Общее количество опубликованных постов по категории.
+        /// </summary>
+        /// <param name="categorySlug"></param>
+        /// <returns></returns>
+        int TotalPostsForCategory(string categorySlug);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="categorySlug"></param>
+        /// <returns></returns>
+        Category Category(string categorySlug);
+
+        /// <summary>
+        /// Посты определенному тэгу.
+        /// </summary>
+        /// <returns></returns>
+        IList<Post> PostsForTag(string tagSlug, int pageNo, int pageSize);
+        
+        /// <summary>
+        /// Общее количество опубликованных постов по категории.
+        /// </summary>
+        int TotalPostsForTag(string tagSlug);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        Tag Tag(string tagSlug);
+
+
     }
 }

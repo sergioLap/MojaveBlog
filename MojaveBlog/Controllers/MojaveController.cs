@@ -29,5 +29,34 @@ namespace MojaveBlog.Controllers
             return View("List", listViewModel);
         }
 
+        public ViewResult Category(string category, int p = 1)
+        {
+            var viewModel = new ListViewModel(_mojaveRepository, category, "Category", p);
+
+            if(viewModel.Category == null)
+                throw new HttpException(404, "Такого раздела не существует!");
+
+            ViewBag.Title = String.Format(@"Последние записи в разделе '{0}'",
+                        viewModel.Category.Name);
+
+            return View("List", viewModel);
+
+        }
+
+
+        public ViewResult Tag(string tag, int p = 1)
+        {
+            var viewModel = new ListViewModel(_mojaveRepository, tag, "Tag", p);
+
+            if (viewModel.Tag == null)
+                throw new HttpException(404, "Такого раздела не существует!");
+
+            ViewBag.Title = String.Format(@"Последние записи по тэгу '{0}'",
+                        viewModel.Tag.Name);
+
+            return View("List", viewModel);
+
+        }
+
     }
 }

@@ -18,6 +18,23 @@ namespace MojaveBlog
                 "{action}",
                 new { controller = "Mojave", action = "Posts" }
             );
+
+            routes.MapRoute(
+                "Tag",
+                "Tag/{tag}",
+                new { controller = "Mojave", action = "Tag" }
+            );
+
+
+            routes.MapRoute(
+                "Category",
+                "Category/{category}",
+                new { controller = "Mojave", action = "Category" }
+            );
+
+
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
@@ -26,8 +43,8 @@ namespace MojaveBlog
                     controller = "Mojave",
                     action = "Posts",
                     id = UrlParameter.Optional
-                }
-                );
+                });
+
         }
     }
 }
