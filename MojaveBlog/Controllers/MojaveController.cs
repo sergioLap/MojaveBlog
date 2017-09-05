@@ -57,6 +57,29 @@ namespace MojaveBlog.Controllers
             return View("List", viewModel);
 
         }
+        public ViewResult Search(string s, int p = 1)
+        {
+            ViewBag.Title = String.Format(@"Наайденные записи '{0}'",s);
+
+            var viewModel = new ListViewModel(_mojaveRepository, s, "Search", p);
+
+            return View("List", viewModel);
+
+        }
+
+        public ViewResult Post(int year, int month, string title)
+        {
+            var post = _mojaveRepository.Post(year, month, title);
+
+            if(post== null)
+                throw new HttpException(404, "Пост не найден");
+
+            if(post.Published == false && User.Identity.IsAuthenticated== false)
+                throw new HttpException(401, "Пост не опубликован");
+
+            return View(post);
+
+        }
 
     }
 }

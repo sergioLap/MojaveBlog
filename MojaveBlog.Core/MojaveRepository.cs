@@ -22,7 +22,21 @@ namespace MojaveBlog.Core
         {
             _session = session;
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Post Post(int year, int month, string titleSlug)
+        {
+            var query = _session.Query<Post>()
+                                .Where(p=>p.DatePost.Year == year && p.DatePost.Month == month && p.UrlSlug.Equals(titleSlug))
+                                .Fetch(p=>p.Category);
+
+            query.FetchMany(p => p.Tags).ToFuture();
+
+            return query.ToFuture().Single(); 
+        }
+
         public IList<Post> Posts(int pageNo, int PageSize)
         {
             var posts = _session.Query<Post>()
@@ -110,6 +124,38 @@ namespace MojaveBlog.Core
         public Tag Tag(string tagSlug)
         {
             return _session.Query<Tag>().FirstOrDefault(t => t.UrlSlug.Equals(tagSlug));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<Post> PostsForSearch(string search, int pageNo, int pageSize)
+        {
+            var posts = _session.Query<Post>()
+                                .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
+                                .OrderByDescending(p => p.DatePost)
+                                .Skip(pageNo * pageSize)
+                                .Take(pageSize)
+                                .Fetch(p => p.Category)
+                                .ToList();
+
+            var postIds = posts.Select(p => p.PostId).ToList();
+
+            return _session.Query<Post>()
+                  .Where(p => postIds.Contains(p.PostId))
+                  .OrderByDescending(p => p.DatePost)
+                  .FetchMany(p => p.Tags)
+                  .ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int TotalPostsForSearch(string search)
+        {
+            return _session.Query<Post>()
+                    .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
+                    .Count();
         }
     }
 }

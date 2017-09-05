@@ -12,6 +12,11 @@ namespace MojaveBlog.Core
     public interface IRepository
     {
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Post Post(int year, int month, string titleSlug);
+        /// <summary>
         /// Возвращает последние опубликованные посты с пагинацией.
         /// </summary>
         /// <param name="pageNo">номер страницы</param>
@@ -62,6 +67,7 @@ namespace MojaveBlog.Core
         /// </summary>
         Tag Tag(string tagSlug);
 
-
+        IList<Post> PostsForSearch(string search, int pageNo, int pageSize);
+        int TotalPostsForSearch(string search);
     }
 }

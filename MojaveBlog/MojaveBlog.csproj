@@ -195,6 +195,7 @@
     <Content Include="Bundles.config" />
     <Content Include="App_Code\Helpers.cshtml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\app.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
@@ -242,6 +243,8 @@
     <None Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Mojave\List.cshtml" />
     <Content Include="Views\Shared\_Pager.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Mojave\Post.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

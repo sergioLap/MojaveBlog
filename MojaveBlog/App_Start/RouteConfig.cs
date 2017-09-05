@@ -14,26 +14,10 @@ namespace MojaveBlog
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Action",
-                "{action}",
-                new { controller = "Mojave", action = "Posts" }
-            );
-
-            routes.MapRoute(
-                "Tag",
-                "Tag/{tag}",
-                new { controller = "Mojave", action = "Tag" }
-            );
-
-
-            routes.MapRoute(
                 "Category",
                 "Category/{category}",
                 new { controller = "Mojave", action = "Category" }
             );
-
-
-
 
             routes.MapRoute(
                 name: "Default",
@@ -45,6 +29,23 @@ namespace MojaveBlog
                     id = UrlParameter.Optional
                 });
 
+            routes.MapRoute(
+                "Tag",
+                "Tag/{tag}",
+                new { controller = "Mojave", action = "Tag" }
+            );
+
+            routes.MapRoute(
+                "Action",
+                "{action}",
+                new { controller = "Mojave", action = "Posts" }
+            );
+
+            routes.MapRoute(
+                "Post",
+                "Archive/{year}/{month}/{title}",
+                new { controller = "Mojave", action = "Post" }
+            );
         }
     }
 }

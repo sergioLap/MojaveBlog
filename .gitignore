@@ -4,3 +4,5 @@ MojaveBlog/bin/
 MojaveBlog/obj/
 packages/
 MojaveBlog/Content/logs/
+/.vs/config/applicationhost.config
+.vs
