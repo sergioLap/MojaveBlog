@@ -69,5 +69,7 @@ namespace MojaveBlog.Core
 
         IList<Post> PostsForSearch(string search, int pageNo, int pageSize);
         int TotalPostsForSearch(string search);
+
+        IList<Category> Categories();
     }
 }

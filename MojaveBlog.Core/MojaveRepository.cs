@@ -157,5 +157,10 @@ namespace MojaveBlog.Core
                     .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
                     .Count();
         }
+
+        public IList<Category> Categories()
+        {
+            return _session.Query<Category>().OrderBy(p => p.Name).ToList();
+        }
     }
 }

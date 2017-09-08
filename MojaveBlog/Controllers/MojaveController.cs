@@ -80,6 +80,11 @@ namespace MojaveBlog.Controllers
             return View(post);
 
         }
-
+        [ChildActionOnly]
+        public PartialViewResult Sidebars()
+        {
+            var widgetViewModel = new WidgetViewModel(_mojaveRepository);
+            return PartialView("_Sidebars", widgetViewModel);
+        }
     }
 }
